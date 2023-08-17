@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <form action="/register" method="post">
+        
+        {% if error_msg %}
+            <p style="color: red;">{{ error_msg }}</p>
+        {% end %}
+
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" value="{{first_name}}" required>
+        <br>
+
+        <label for="middle_name">Middle Name:</label>
+        <input type="text" id="middle_name" name="middle_name" value="{{middle_name}}">
+        <br>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" value="{{last_name}}" required>
+        <br>
+
+        <label for="gender">Gender:</label>
+        <select name="gender">
+            <option value="1">Male</option>
+            <option value="0">Female</option>
+        </select>
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{email}}" required>
+        <br>
+        
+        <label for="number">Number:</label>
+        <input type="tel" id="number" name="number" value="{{number}}" required>
+        <br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"  value="{{password}}" required>
+        <br>
+
+        <input type="submit" value="Register">
+    </form>
+    <p>Already have an account? <a href="/login">Login here</a>.</p>
+</body>
+</html>

@@ -1,0 +1,100 @@
+{% extends "../base.html" %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="/static/css/userlist_style.css">
+{% end %}
+
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <!-- <div class="card-body">
+                    <h5 class="card-title text-uppercase mb-0">Manage Users</h5>
+                </div> -->
+        <div class="table-responsive">
+          <table class="table no-wrap user-table mb-0">
+            <thead>
+              <tr>
+                <th scope="col" class="border-0 text-uppercase font-medium pl-4">ID</th>
+                <th scope="col" class="border-0 text-uppercase font-medium">Profile Picture</th>
+                <th scope="col" class="border-0 text-uppercase font-medium">Full Name</th>
+                <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
+                <th scope="col" class="border-0 text-uppercase font-medium">Phone Number</th>
+              </tr>
+              <tr class="search-row">
+                <form action="{{page_url}}" method="get" id="user-list-search-form">
+                  <td><input type="number" id="user_id" name="user_id" placeholder="id" value="{{user_id}}" style="width: 50px;"></td>
+                  <td></td>
+                  <td><input type="text" id="fullname" name="fullname" value="{{fullname}}" placeholder="fullname"></td>
+                  <td><input type="text" id="email" name="email" value="{{email}}" placeholder="email"></td>
+                  <td><input type="text" id="number" name="number" value="{{number}}" placeholder="phone number"></td>
+                  <td></td>
+                </form>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in user_list %}
+
+              <tr>
+                <td class="pl-4">{{user['user_id']}}</td>
+                <td>
+                  <img class="user-profile-picture" src="{{ user['photo_url'] }}" alt="{{user['alt_image_text']}}"
+                    onclick="redirect('/user?id=',{{user.get('user_id')}})">
+                </td>
+                <td>
+                  <h6 class="font-medium mb-0">{{user['fullname']}}</h6>
+                  {% if user.get('address') %}
+                  <span class="text-muted">{{user['address']}}</span>
+                  {% end %}
+                </td>
+                <td>
+                  {% if user.get('email') %}
+                  <span class="text-muted">{{user['email']}}</span><br>
+                  {% end %}
+                </td>
+                <td>
+                  {% if user.get('number') %}
+                  <span class="text-muted">{{user['number']}}</span><br>
+                  {% end %}
+                </td>
+                <!-- <td>
+                              <select class="form-control category-select" id="exampleFormControlSelect1">
+                                <option>Modulator</option>
+                                <option>Admin</option>
+                                <option>User</option>
+                                <option>Subscriber</option>
+                              </select>
+                            </td> -->
+                <!-- <td>
+                              <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
+                              <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
+                              <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
+                              <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
+                            </td> -->
+              </tr>
+
+              {% end %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% end %}
+
+
+{% block scripts %}
+<script>
+
+  var userListSearchForm = "user-list-search-form"
+    attachSubmitOnEnterListener("user_id", userListSearchForm);
+    attachSubmitOnEnterListener("fullname", userListSearchForm);
+    attachSubmitOnEnterListener("email", userListSearchForm);
+    attachSubmitOnEnterListener("number", userListSearchForm);
+
+</script>
+{% end %}
